@@ -1,0 +1,3 @@
+<?php
+// URL входящего вебхука Битрикс24, заканчивается на /rest/...
+define('WEBHOOK_URL', 'https://your-domain.bitrix24.ru/rest/1/your_webhook_code/');
