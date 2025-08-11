@@ -34,13 +34,20 @@ do {
 echo "Найдено пользователей: " . count($users) . PHP_EOL;
 
 foreach ($users as $user) {
-    $name = $user['NAME'];
-    $secondName = $user['SECOND_NAME'];
-    $lastName = $user['LAST_NAME'];
     $userId = $user['ID'];
 
-    // Проверяем, есть ли в имени пробел (например: "Иван Иванович")
-    if (strpos($name, ' ') !== false) {
+    // Проверяем и выводим значения или сообщение о пустом поле
+    $name = isset($user['NAME']) && trim($user['NAME']) !== '' ? $user['NAME'] : 'данное поле пустое';
+    $secondName = isset($user['SECOND_NAME']) && trim($user['SECOND_NAME']) !== '' ? $user['SECOND_NAME'] : 'данное поле пустое';
+    $lastName = isset($user['LAST_NAME']) && trim($user['LAST_NAME']) !== '' ? $user['LAST_NAME'] : 'данное поле пустое';
+
+    echo "Пользователь ID $userId:" . PHP_EOL;
+    echo "  NAME: $name" . PHP_EOL;
+    echo "  SECOND_NAME: $secondName" . PHP_EOL;
+    echo "  LAST_NAME: $lastName" . PHP_EOL;
+
+    // Если в имени есть пробел, разбиваем на имя и отчество
+    if ($name !== 'данное поле пустое' && strpos($name, ' ') !== false) {
         $parts = explode(' ', $name, 2);
         $newName = $parts[0];
         $newSecondName = $parts[1];
